@@ -23,7 +23,12 @@ async execute(ctx) {
   fs.createReadStream('selfbots.csv')
     .pipe(csv())
     .on('data', (row) => {
-     ctx.msg.channel.guild.members.get(row.user)?.ban(7, "Ban know selfbots")
+      setTimeout(() => {
+       
+
+    ctx.msg.channel.guild.banMember(row.user).catch((e) => console.log(e))
+      console.log(row.user)
+    }, 3000);  
     })
     .on('end', () => {
     msg.edit(ctx.t("commands:antiselfbot.sucess"))
